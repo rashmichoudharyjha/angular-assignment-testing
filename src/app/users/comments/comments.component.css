@@ -1,0 +1,10 @@
+.user_name {
+  float: left;
+  width: 30%;
+  font-weight: bold;
+}
+
+.comment {
+  float: right;
+  width: 70%;
+}

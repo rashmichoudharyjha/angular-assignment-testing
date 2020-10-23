@@ -1,0 +1,31 @@
+<mat-card class="full_width margin_top24">
+	<mat-accordion>
+		<ng-container *ngFor="let post of selectedUserPosts; let i = index">
+			<mat-expansion-panel *ngIf=" i < 3 || showAllPosts">
+				<mat-expansion-panel-header>
+					<mat-panel-title class="block">
+						<div class="full_width">
+							<span class= "title"> {{labels.TITLE }} {{i+1}} {{labels.END_TAG}}
+          </span>
+							<span class= "content">
+            {{post.title}}
+          </span>
+						</div>
+						<div class="full_width ">
+							<span  class= "title"> {{labels.BODY_HEADING}} {{i+1}} {{labels.END_TAG}}
+          </span>
+							<span class= "content">
+            {{post.body}}
+          </span>
+						</div>
+					</mat-panel-title>
+				</mat-expansion-panel-header>
+				<app-comments [commentList]="getCommentsforpost(post.id)"></app-comments>
+			</mat-expansion-panel>
+		</ng-container>
+
+	</mat-accordion>
+	<div *ngIf="!showAllPosts">
+		<button mat-button color="primary" (click)="showRestPosts()">{{labels.LOAD_MORE}}</button>
+	</div>
+</mat-card>

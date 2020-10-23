@@ -1,0 +1,22 @@
+.full_width {
+  width: 100%;
+}
+
+.margin_top24 {
+  margin-top: 24px;
+}
+
+.block {
+  display: block;
+}
+
+.title {
+  float: left;
+  font-weight: bold;
+  width: 10%;
+}
+
+.content {
+  float: right;
+  width: 90%;
+}
