@@ -1,10 +1,12 @@
+import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { UsersComponent } from './users.component';
+import { UserService } from '../services/user.service';
 import { mockComments } from '../services/mocks/comments.mock';
 import { mockPosts } from '../services/mocks/posts.mock';
 
-
 describe('UsersComponent', () => {
+    let fixture
     let component;
     let mockUserService;
     const userList = [{ id: 1, name: 'test' }]
@@ -12,10 +14,16 @@ describe('UsersComponent', () => {
     const comments = mockComments;
     beforeEach(() => {
         mockUserService = jasmine.createSpyObj('UserService', ['getUsersList', 'getUsersPost', 'getcomments']);
-        component = new UsersComponent(mockUserService);
+        TestBed.configureTestingModule({
+            declarations: [UsersComponent],
+            providers: [{ provide: UserService, useValue: mockUserService }]
+        }).compileComponents();
+        fixture = TestBed.createComponent(UsersComponent);
+        component = fixture.debugElement.componentInstance;
         mockUserService.getUsersList.and.returnValue(of(userList));
         mockUserService.getUsersPost.and.returnValue(of(posts));
         mockUserService.getcomments.and.returnValue(of(comments));
+
     });
     it('should create the User component', () => {
         component.ngOnInit();

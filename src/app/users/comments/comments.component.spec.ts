@@ -14,9 +14,9 @@ describe('Comments Component', () => {
 
     it('should create the comments component', () => {
         const fixture = TestBed.createComponent(CommentsComponent);
-        const header = fixture.componentInstance;
-        header.commentList = mockComments;
-        expect(header).toBeTruthy();
+        const component = fixture.componentInstance;
+        component.commentList = mockComments;
+        expect(component).toBeTruthy();
     });
 
 });

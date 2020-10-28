@@ -1,14 +1,22 @@
+import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { PostsComponent } from './posts.component';
 import { mockComments } from 'src/app/services/mocks/comments.mock';
 import { mockPosts } from 'src/app/services/mocks/posts.mock';
-import { PostsComponent } from './posts.component';
 
 
 describe('PostsComponent', () => {
     let component;
+    let fixture;
+    let el: HTMLElement;
     const posts = mockPosts;
     const comments = mockComments;
     beforeEach(() => {
-        component = new PostsComponent();
+        TestBed.configureTestingModule({
+            declarations: [PostsComponent]
+        }).compileComponents();
+        fixture = TestBed.createComponent(PostsComponent);
+        component = fixture.debugElement.componentInstance;
         component.allPosts = posts;
         component.allComments = comments;
         component.userId = 1;
@@ -30,6 +38,14 @@ describe('PostsComponent', () => {
     it('should set showAllPosts to true', () => {
         component.showRestPosts();
         expect(component.showAllPosts).toEqual(true);
+    });
+
+    it('should call showRestPosts function', () => {
+        fixture.detectChanges();
+        spyOn(component, 'showRestPosts')
+        el = fixture.debugElement.query(By.css('button')).nativeElement;
+        el.click();
+        expect(component.showRestPosts).toHaveBeenCalled();
     });
 
 });
