@@ -4,6 +4,9 @@ import { UsersComponent } from './users.component';
 import { UserService } from '../services/user.service';
 import { mockComments } from '../services/mocks/comments.mock';
 import { mockPosts } from '../services/mocks/posts.mock';
+import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DemoMaterialModule } from '../material-module';
 
 describe('UsersComponent', () => {
     let fixture
@@ -15,6 +18,10 @@ describe('UsersComponent', () => {
     beforeEach(() => {
         mockUserService = jasmine.createSpyObj('UserService', ['getUsersList', 'getUsersPost', 'getcomments']);
         TestBed.configureTestingModule({
+            imports: [
+                BrowserAnimationsModule,
+                DemoMaterialModule,
+            ],
             declarations: [UsersComponent],
             providers: [{ provide: UserService, useValue: mockUserService }]
         }).compileComponents();
@@ -83,6 +90,23 @@ describe('UsersComponent', () => {
             expect(component.allComments).toBeUndefined();
             expect(component.isUserListLoaded).toEqual(false);
         });
+    });
+
+    it('should have same number of user as returned from service', () => {
+        component.isUserListLoaded = true;
+        component.ngOnInit();
+        fixture.detectChanges();
+        let userElement = fixture.nativeElement.querySelectorAll('mat-button-toggle');
+        expect(userElement.length).toBe(userList.length);
+        let elementValue = userElement[0].innerText;
+        expect(elementValue).toEqual(userList[0].name);
+    });
+
+    it('should have loader while data is loading', () => {
+        component.isUserListLoaded = false;
+        fixture.detectChanges();
+        let loader = fixture.nativeElement.querySelector('mat-spinner');
+        expect(loader).toBeDefined();
     });
 
 });
