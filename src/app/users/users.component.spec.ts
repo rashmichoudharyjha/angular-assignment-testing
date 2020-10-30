@@ -1,12 +1,13 @@
-import { TestBed } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
+import { DemoMaterialModule } from '../material-module';
 import { UsersComponent } from './users.component';
+import { PostsComponent } from './posts/posts.component';
 import { UserService } from '../services/user.service';
 import { mockComments } from '../services/mocks/comments.mock';
 import { mockPosts } from '../services/mocks/posts.mock';
-import { By } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DemoMaterialModule } from '../material-module';
+
 
 describe('UsersComponent', () => {
     let fixture
@@ -15,14 +16,14 @@ describe('UsersComponent', () => {
     const userList = [{ id: 1, name: 'test' }]
     const posts = mockPosts;
     const comments = mockComments;
-    beforeEach(() => {
+    beforeEach(async(() => {
         mockUserService = jasmine.createSpyObj('UserService', ['getUsersList', 'getUsersPost', 'getcomments']);
         TestBed.configureTestingModule({
             imports: [
                 BrowserAnimationsModule,
                 DemoMaterialModule,
             ],
-            declarations: [UsersComponent],
+            declarations: [UsersComponent, PostsComponent],
             providers: [{ provide: UserService, useValue: mockUserService }]
         }).compileComponents();
         fixture = TestBed.createComponent(UsersComponent);
@@ -31,7 +32,7 @@ describe('UsersComponent', () => {
         mockUserService.getUsersPost.and.returnValue(of(posts));
         mockUserService.getcomments.and.returnValue(of(comments));
 
-    });
+    }));
     it('should create the User component', () => {
         component.ngOnInit();
         expect(component).toBeTruthy();
