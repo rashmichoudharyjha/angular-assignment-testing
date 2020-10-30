@@ -1,5 +1,6 @@
 import { async, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { DemoMaterialModule } from '../material-module';
 import { UsersComponent } from './users.component';

@@ -55,10 +55,11 @@ describe('PostsComponent', () => {
         expect(posts.length).toEqual(component.allPosts.length);
     });
 
-    it('should create comment component for all posts', () => {
+    it('should create comment component for all posts and send filtered comment to component', () => {
         fixture.detectChanges();
         let commentComponent = fixture.debugElement.queryAll(By.directive(CommentsComponent)).map(el => el.componentInstance);
         expect(commentComponent.length).toEqual(component.allPosts.length);
+        expect(commentComponent[0].commentList).toEqual(mockComments);
     });
 
 });
