@@ -13,7 +13,7 @@ export class UserService {
   userListAPI = `${DataApi}/users`;
   usersPostAPI = `${DataApi}/posts`;
   usersCommentsAPI = `${DataApi}/comments`;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // Error handling for the API is done through http intercepter
 

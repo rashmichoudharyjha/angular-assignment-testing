@@ -14,7 +14,7 @@ export class UsersComponent implements OnInit {
   allUserPosts: Post[];
   allComments: Comments[];
   isUserListLoaded: boolean = false;
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.getUsers();
